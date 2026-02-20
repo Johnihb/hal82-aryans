@@ -34,25 +34,25 @@ function NavbarDemo({ session }: { session: Session | null }) {
     },
   ];
 
-  const navItemsAfterLogin =[
-     {
+  const navItemsAfterLogin = [
+    {
       name: "Map",
-      link: "map",
+      link: "/map",
     },
     {
       name: "Assistant",
-      link: "assistant",
+      link: "/assistant",
     },
     {
       name: "Contact",
-      link: "contacts",
+      link: "/contacts",
     },
   ]
 
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
- 
+
   return (
     <div className="relative w-full text-black">
       <Navbar>
@@ -61,19 +61,19 @@ function NavbarDemo({ session }: { session: Session | null }) {
         <NavBody>
           <NavbarLogo />
           {
-            session?.user?.email ? 
-            <NavItems items={navItemsAfterLogin} /> : <NavItems items={navItemsBeforeLogin} />
+            session?.user?.email ?
+              <NavItems items={navItemsAfterLogin} /> : <NavItems items={navItemsBeforeLogin} />
           }
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             {session?.user && (
-              <NavbarButton variant="secondary">
+              <NavbarButton variant="secondary" className="rounded-full text-neutral-500 hover:text-red-600 p-2">
                 <Link href={"/notification"}>
-                  <Bell className="h-4 w-4" />
+                  <Bell className="h-5 w-5" />
                 </Link>
               </NavbarButton>
             )}
-          <LoginDialog sessionUser={session?.user?.email}/>          
+            <LoginDialog sessionUser={session?.user?.email} />
           </div>
         </NavBody>
 
@@ -90,30 +90,20 @@ function NavbarDemo({ session }: { session: Session | null }) {
             isOpen={isMobileMenuOpen}
             onClose={() => setIsMobileMenuOpen(false)}
           >
-            {session?.user?.email ?
-            navItemsBeforeLogin.map((item, idx) => (
+            {(session?.user?.email ? navItemsAfterLogin : navItemsBeforeLogin).map((item, idx) => (
               <Link
                 key={`mobile-link-${idx}`}
-                href={`/${item.link}`}
+                href={item.link}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="relative text-neutral-600 dark:text-neutral-300 z-[5000]"
+                className="block py-3 text-lg font-semibold text-neutral-800 hover:text-red-600 transition-colors border-b border-neutral-50 last:border-0"
               >
-                <span className="block">{item.name}</span>
-              </Link>
-            ))
-            :
-            navItemsAfterLogin.map((item, idx) => (
-              <Link
-                key={`mobile-link-${idx}`}
-                href={`/${item.link}`}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="relative text-neutral-600 dark:text-neutral-300 z-[5000]"
-              >
-                <span className="block">{item.name}</span>
+                {item.name}
               </Link>
             ))
             }
-            <LoginDialog sessionUser={session?.user?.email }/>
+            <div className="pt-4">
+              <LoginDialog sessionUser={session?.user?.email} />
+            </div>
           </MobileNavMenu>{" "}
         </MobileNav>
       </Navbar>

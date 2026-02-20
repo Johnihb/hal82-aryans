@@ -1,225 +1,243 @@
 "use client";
 
-import { signOut, signUp } from "@/lib/action/auth-client";
-import { auth } from "@/lib/auth";
 import { motion } from "motion/react";
 import Link from "next/link";
-import { MapPin, Shield, Phone, Navigation, Zap, Users } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { MapPin, Shield, Phone, Navigation, Zap, Users, ArrowRight, ChevronRight, UserPlus, ShieldCheck, Pointer, Activity } from "lucide-react";
 
 export default function HeroSectionOne() {
   const features = [
     {
       icon: <MapPin className="h-6 w-6" />,
-      title: "Real-time Location Tracking",
-      description: "Track your location and get directions with our advanced mapping technology."
+      title: "Real-time Tracking",
+      description: "Advanced GPS mapping for pinpoint location accuracy at every moment.",
+      color: "text-blue-600",
+      bg: "bg-blue-50",
+      hoverShadow: "hover:shadow-blue-600/5",
+      hoverBorder: "hover:border-blue-600/30",
+      iconHover: "group-hover:bg-blue-600",
     },
     {
       icon: <Shield className="h-6 w-6" />,
       title: "Emergency Contacts",
-      description: "Add and verify emergency contacts for quick access when you need help."
+      description: "Instant access to verified emergency contacts when you need them most.",
+      color: "text-red-600",
+      bg: "bg-red-50",
+      hoverShadow: "hover:shadow-red-600/5",
+      hoverBorder: "hover:border-red-600/30",
+      iconHover: "group-hover:bg-red-600",
     },
     {
       icon: <Phone className="h-6 w-6" />,
       title: "SMS Verification",
-      description: "Secure phone number verification to keep your account protected."
+      description: "Bank-grade phone verification to keep your account secure.",
+      color: "text-green-600",
+      bg: "bg-green-50",
+      hoverShadow: "hover:shadow-green-600/5",
+      hoverBorder: "hover:border-green-600/30",
+      iconHover: "group-hover:bg-green-600",
     },
     {
       icon: <Navigation className="h-6 w-6" />,
       title: "Multi-modal Routing",
-      description: "Choose from driving, cycling, or walking directions for your journey."
+      description: "Drive, cycle, or walk — smart routes tailored to you.",
+      color: "text-purple-600",
+      bg: "bg-purple-50",
+      hoverShadow: "hover:shadow-purple-600/5",
+      hoverBorder: "hover:border-purple-600/30",
+      iconHover: "group-hover:bg-purple-600",
     },
     {
       icon: <Zap className="h-6 w-6" />,
       title: "AI Assistant",
-      description: "Get intelligent assistance and support through our AI-powered chatbot."
+      description: "Intelligent AI-powered support available around the clock.",
+      color: "text-amber-600",
+      bg: "bg-amber-50",
+      hoverShadow: "hover:shadow-amber-600/5",
+      hoverBorder: "hover:border-amber-600/30",
+      iconHover: "group-hover:bg-amber-600",
     },
     {
       icon: <Users className="h-6 w-6" />,
-      title: "Close One Network",
-      description: "Build your trusted network of close contacts for enhanced safety."
-    }
+      title: "Close Ones Network",
+      description: "Build a trusted circle for enhanced personal safety.",
+      color: "text-teal-600",
+      bg: "bg-teal-50",
+      hoverShadow: "hover:shadow-teal-600/5",
+      hoverBorder: "hover:border-teal-600/30",
+      iconHover: "group-hover:bg-teal-600",
+    },
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <div className="relative mx-auto my-10 flex max-w-7xl flex-col items-center justify-center px-4">
-        <div className="absolute inset-y-0 left-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
-          <div className="absolute top-0 h-40 w-px bg-gradient-to-b from-transparent via-blue-500 to-transparent" />
-        </div>
-        <div className="absolute inset-y-0 right-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
-          <div className="absolute h-40 w-px bg-gradient-to-b from-transparent via-blue-500 to-transparent" />
-        </div>
-        <div className="absolute inset-x-0 bottom-0 h-px w-full bg-neutral-200/80 dark:bg-neutral-800/80">
-          <div className="absolute mx-auto h-px w-40 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
-        </div>
+    <div className="min-h-screen bg-white font-sans text-neutral-900">
+      {/* ─── Hero Section ─── */}
+      <section className="relative flex min-h-[90vh] flex-col items-center justify-center px-6 py-24 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mx-auto max-w-6xl"
+        >
 
-        <div className="px-4 py-10 md:py-20">
-          <h1 className="relative z-10 mx-auto max-w-4xl text-center text-2xl font-bold text-slate-700 md:text-4xl lg:text-7xl dark:text-slate-300">
-            {"Stay Safe, Stay Connected"
-              .split(" ")
-              .map((word, index) => (
-                <motion.span
-                  key={index}
-                  initial={{ opacity: 0, filter: "blur(4px)", y: 10 }}
-                  animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-                  transition={{
-                    duration: 0.3,
-                    delay: index * 0.1,
-                    ease: "easeInOut",
-                  }}
-                  className="mr-2 inline-block"
-                >
-                  {word}
-                </motion.span>
-              ))}
+          <h1 className="mb-8 text-4xl font-black tracking-tight text-green-950 md:text-6xl lg:text-7xl flex items-center justify-center flex-wrap gap-x-4">
+            <span className="text-blue-700">Stay Safe,</span>
+            <span className="flex items-center text-red-600">
+              Stay Connected
+              <Activity className="ml-2 h-8 w-8 md:h-12 md:w-12 text-red-600 animate-pulse" />
+            </span>
           </h1>
-          <motion.p
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            transition={{
-              duration: 0.3,
-              delay: 0.8,
-            }}
-            className="relative z-10 mx-auto max-w-xl py-4 text-center text-lg font-normal text-neutral-600 dark:text-neutral-400"
-          >
-            Your personal safety companion with real-time location tracking, emergency contacts,
-            and AI-powered assistance. Never feel alone when you need help most.
-          </motion.p>
-          <motion.div
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            transition={{
-              duration: 0.3,
-              delay: 1,
-            }}
-            className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-4"
-          >
+          <p className="mx-auto mb-12 max-w-3xl text-lg leading-relaxed text-neutral-600 md:text-xl">
+            The world's most intuitive safety companion. Real-time tracking,
+            emergency response, and AI assistance — all on one clean, reliable platform.
+          </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-4">
             <Link href="/dashboard">
-              <button className="w-60 transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200">
-                Get Started
+              <button className="h-14 rounded-full bg-blue-700 px-10 text-base font-bold text-white transition-all hover:bg-blue-800 hover:shadow-xl active:scale-95">
+                Join Now — It's Free
               </button>
             </Link>
-            <Link href="/contacts">
-              <button className="w-60 transform rounded-lg border border-gray-300 bg-white px-6 py-2 font-medium text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100 dark:border-gray-700 dark:bg-black dark:text-white dark:hover:bg-gray-900">
-                Add Emergency Contacts
+            <Link href="/dashboard">
+              <button className="h-14 rounded-full border-2 border-neutral-200 bg-white px-10 text-base font-bold text-green-950 transition-all hover:border-green-600 hover:text-green-600 active:scale-95">
+                Learn More
               </button>
             </Link>
-          </motion.div>
-        </div>
-      </div>
+          </div>
+        </motion.div>
+      </section>
 
-      {/* Features Section */}
-      <div id='about'  className="bg-muted/30 py-20">
-        <div className="mx-auto max-w-7xl px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl font-bold text-foreground md:text-4xl">
-              Everything you need for safety
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Comprehensive safety features designed to keep you protected
-            </p>
-          </motion.div>
+      {/* ─── Features Grid ─── */}
+      <section id="about" className="bg-neutral-50 px-6 py-32 border-y border-neutral-100">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-20 text-center">
+            <h2 className="mb-4 text-3xl font-black text-green-950 md:text-5xl"> Built for Certainty</h2>
+            <p className="mx-auto max-w-xl text-neutral-600">Powerful features designed to keep you safe in any situation.</p>
+          </div>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature, index) => (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {features.map((feature, idx) => (
               <motion.div
-                key={index}
+                key={idx}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="rounded-lg border bg-card p-6 shadow-sm transition-all hover:shadow-md"
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className={cn(
+                  "group rounded-3xl border border-neutral-200 bg-white p-8 transition-all hover:shadow-2xl",
+                  feature.hoverBorder,
+                  feature.hoverShadow
+                )}
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <div className={cn(
+                  "mb-6 flex h-14 w-14 items-center justify-center rounded-2xl transition-colors group-hover:text-white",
+                  feature.bg,
+                  feature.color,
+                  feature.iconHover
+                )}>
                   {feature.icon}
                 </div>
-                <h3 className="mb-2 text-xl font-semibold text-card-foreground">
-                  {feature.title}
-                </h3>
-                <p className="text-muted-foreground">
-                  {feature.description}
-                </p>
+                <h3 className="mb-3 text-xl font-bold text-green-950">{feature.title}</h3>
+                <p className="leading-relaxed text-neutral-600">{feature.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* CTA Section */}
-      <div id='contact'  className="py-20">
-        <div className="mx-auto max-w-4xl px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl font-bold text-foreground md:text-4xl">
-              Ready to stay safe?
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Join thousands of users who trust our platform for their safety needs.
-            </p>
-            <div className="mt-8">
-              <Link href="/dashboard">
-                <button className="rounded-lg bg-primary px-8 py-3 font-medium text-primary-foreground transition-all hover:bg-primary/90">
-                  Start Your Safety Journey
-                </button>
-              </Link>
-            </div>
-          </motion.div>
+      {/* ─── How It Works Section ─── */}
+      <section id="how-it-works" className="px-6 py-32 bg-white">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-20 text-center">
+            <span className="mb-4 inline-block text-sm font-bold tracking-widest text-green-600 uppercase">
+              Simple & Fast
+            </span>
+            <h2 className="mb-4 text-3xl font-black text-green-950 md:text-5xl">How it Works</h2>
+            <p className="mx-auto max-w-xl text-neutral-600">Join 50k+ users who trust Emergen for their peace of mind.</p>
+          </div>
+
+          <div className="grid gap-12 md:grid-cols-3">
+            {[
+              {
+                icon: <UserPlus className="h-8 w-8" />,
+                title: "Create Account",
+                desc: "Sign up in seconds and verify your identity for absolute security.",
+                step: "01"
+              },
+              {
+                icon: <Users className="h-8 w-8" />,
+                title: "Add Network",
+                desc: "Link your trusted emergency contacts and closest friends.",
+                step: "02"
+              },
+              {
+                icon: <ShieldCheck className="h-8 w-8" />,
+                title: "Stay Protected",
+                desc: "Our AI and network keep watch, ready to assist 24/7.",
+                step: "03"
+              }
+            ].map((step, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="relative text-center group"
+              >
+                <div className="mb-8 mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-green-50 text-green-600 transition-all group-hover:scale-110 group-hover:bg-green-600 group-hover:text-white shadow-lg shadow-green-600/5">
+                  {step.icon}
+                  <span className="absolute -top-2 -right-2 text-4xl font-black text-green-600/10 group-hover:text-white/20">
+                    {step.step}
+                  </span>
+                </div>
+                <h3 className="mb-4 text-2xl font-bold text-green-950">{step.title}</h3>
+                <p className="text-neutral-600 leading-relaxed">{step.desc}</p>
+
+                {idx < 2 && (
+                  <div className="hidden lg:block absolute top-10 -right-6 w-12 text-neutral-200">
+                    <ArrowRight className="h-8 w-8" />
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="mt-24 text-center">
+            <Link href="/dashboard">
+              <button className="h-16 rounded-full bg-green-950 px-12 text-lg font-bold text-white transition-all hover:bg-green-900 hover:shadow-2xl hover:shadow-green-950/20 active:scale-95">
+                Ready to take control? Start Now
+              </button>
+            </Link>
+          </div>
         </div>
-      </div>
+      </section>
 
-      {/* Footer */}
-      <footer id="policy"  className="border-t bg-muted/30 py-12">
-        <div className="mx-auto max-w-7xl px-4">
-          <div className="grid gap-8 md:grid-cols-4">
-            <div>
-              <h3 className="text-lg font-semibold text-foreground">Safety App</h3>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Your personal safety companion
+      {/* ─── Footer ─── */}
+      <footer id="policy" className="border-t border-neutral-100 bg-white px-6 py-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+            <div className="col-span-1 md:col-span-2 lg:col-span-1">
+              <div className="mb-6 flex items-center gap-3">
+                <img src="/logo.svg" alt="Emergen Logo" className="h-12 w-12 object-contain" />
+              </div>
+              <p className="max-w-xs text-neutral-500">
+                Building a safer world through connection and intelligent assistance.
               </p>
             </div>
-            <div>
-              <h4 className="font-medium text-foreground">Features</h4>
-              <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
-                <li>Location Tracking</li>
-                <li>Emergency Contacts</li>
-                <li>AI Assistant</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-medium text-foreground">Support</h4>
-              <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
-                <li>Help Center</li>
-                <li>Contact Us</li>
-                <li>Privacy Policy</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-medium text-foreground">Legal</h4>
-              <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
-                <li>Terms of Service</li>
-                <li>Privacy Policy</li>
-                <li>Cookie Policy</li>
-              </ul>
-            </div>
+            {['Features', 'Support', 'Legal'].map((title) => (
+              <div key={title}>
+                <h4 className="mb-6 text-sm font-bold uppercase tracking-widest text-green-950">{title}</h4>
+                <ul className="space-y-4 text-neutral-500">
+                  {title === 'Features' && ['Location Tracking', 'Emergency Contacts', 'AI Assistant'].map(l => <li key={l} className="hover:text-red-600 cursor-pointer transition-colors">{l}</li>)}
+                  {title === 'Support' && ['Help Center', 'Contact Us', 'Privacy Policy'].map(l => <li key={l} className="hover:text-red-600 cursor-pointer transition-colors">{l}</li>)}
+                  {title === 'Legal' && ['Terms of Service', 'Privacy Policy', 'Cookie Policy'].map(l => <li key={l} className="hover:text-red-600 cursor-pointer transition-colors">{l}</li>)}
+                </ul>
+              </div>
+            ))}
           </div>
-          <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; 2024 Safety App. All rights reserved.</p>
+          <div className="mt-20 border-t border-neutral-100 pt-10 text-center text-sm text-neutral-400">
+            © {new Date().getFullYear()} Emergen. All rights reserved.
           </div>
         </div>
       </footer>
@@ -227,43 +245,3 @@ export default function HeroSectionOne() {
   );
 }
 
-
-
-
-
-
-
-
-type  Session  = typeof auth.$Infer.Session
-
-export const Navbar = ({session}:{
-  session : Session | null
-}) => {
-  const handleSign =async ()=>{
-    if(session && session?.user) return await signOut()
-
-    const response = await signUp()
-    
-  }
-  return (
-    <nav className="flex w-full items-center justify-between border-t border-b border-neutral-200 px-4 py-4 dark:border-neutral-800">
-      <div className="flex items-center gap-2">
-        <div className="size-7 rounded-full bg-gradient-to-br from-violet-500 to-pink-500" />
-        <h1 className="text-base font-bold md:text-2xl">Aceternity UI</h1>
-      </div>
-
-      <Link href="/contacts" className="flex items-center gap-2">
-        Contacts
-      </Link>
-    
-      <Link href="/assistant" className="flex items-center gap-2">
-        Agent
-      </Link>
-    
-
-      <button className="w-24 transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 md:w-32 dark:bg-white dark:text-black dark:hover:bg-gray-200" onClick={handleSign}>
-       {session?.user ? "Logout" : "Sign Up"}
-      </button>
-    </nav>
-  );
-};
