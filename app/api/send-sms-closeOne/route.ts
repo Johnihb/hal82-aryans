@@ -1,5 +1,6 @@
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
+import { validateTwilioCredentials } from "@/lib/twilio";
 import { randomInt } from "crypto";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
@@ -83,16 +84,16 @@ export async function POST(req: NextRequest) {
     const randomNumber = randomInt(100000, 1000000);
 
 
-    const accountSid = process.env.TWILIO_ACCOUNT_SID;
-    const authToken = process.env.TWILIO_AUTH_TOKEN;
-    const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
+     const result = await validateTwilioCredentials();
 
-    if (!accountSid || !authToken || !twilioPhoneNumber) {
-      return NextResponse.json(
-        { message: "Twilio credentials not configured" },
-        { status: 500 },
-      );
-    }
+      if (!result.success) {
+        return (
+          { message: result.message }
+        );
+      }
+      
+      const {accountSid, authToken, twilioPhoneNumber} = result;
+
 
     try {
       /* //! for parallel processing which can be useful in future

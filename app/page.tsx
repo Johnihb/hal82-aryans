@@ -2,7 +2,7 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import HeroSection from "../components/hero-section-demo-1";
 import { redirect } from "next/navigation";
-
+import UserLocation from "../components/userLocation";
 
 
 export default async function Home() {
@@ -13,6 +13,11 @@ export default async function Home() {
 
   if(session && session?.user) return redirect('/dashboard')
 
-  return  <HeroSection />
+  return  (
+  <>
+  <HeroSection />
+  <UserLocation />
+  </>
   
+)
 }
