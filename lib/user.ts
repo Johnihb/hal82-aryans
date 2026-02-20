@@ -21,10 +21,10 @@ export const userCloseOne= async():Promise<{success:boolean , count?:number , us
   // const count = await prisma.closeOne.count({where:{userId:session.user.id}})
   const [userCloseOne , count] = await Promise.allSettled([
     prisma.user.findUnique({where:{id:session.user.id},
-    include:{close_ones:true}
+    include:{closeOnePhoneNumbers:true}
   }
   ),
-  prisma.close_ones.count({where:{userId:session.user.id}})])
+  prisma.closeOne.count({where:{userId:session.user.id}})])
   
   if (count.status !== 'fulfilled' || count.value === undefined ||userCloseOne.status !== 'fulfilled' || !userCloseOne.value) return {success: false}  
   return {success:true , count:count.value , userCloseOne:userCloseOne.value}
@@ -33,5 +33,5 @@ export const userCloseOne= async():Promise<{success:boolean , count?:number , us
 export const deleteNumber = async (phoneNumber:string)=>{
   const session = await auth.api.getSession({headers:await headers()})
   if(!session)return
-  await prisma.close_ones.deleteMany({where:{userId:session.user.id , phoneNumber}})
+  await prisma.closeOne.deleteMany({where:{userId:session.user.id , phoneNumber}})
 }
