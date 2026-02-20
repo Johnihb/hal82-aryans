@@ -17,8 +17,6 @@ const page = async () => {
   const user = await userStatus()
   const closeOneData = await userCloseOne()
 
-  console.log('user' , user)
-  console.log('closeOneData' , closeOneData)
   return <DashboardContent user={user} closeOneData={closeOneData} username={session?.user?.name ||"User"} />
 }
 
