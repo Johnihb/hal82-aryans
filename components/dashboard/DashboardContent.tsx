@@ -44,12 +44,10 @@ export default function DashboardContent({ user, closeOneData, username }: Dashb
     await signOut();
   };
 
-  const userCloseOnesCount = closeOneData.userCloseOne?.close_ones?.length 
-
   const stats = [
     {
       title: "Emergency Contacts",
-      value: userCloseOnesCount || 0,
+      value: closeOneData.userCloseOne?.closeOnePhoneNumbers?.length || 0,
       description: "Verified close ones",
       icon: <Users className="h-4 w-4" />,
       color: "text-blue-600"
@@ -201,8 +199,8 @@ export default function DashboardContent({ user, closeOneData, username }: Dashb
           <Card>
             <CardContent className="p-6">
               <div className="space-y-4">
-                {userCloseOnesCount && userCloseOnesCount > 0 ? (
-                  closeOneData.userCloseOne?.close_ones.slice(0, 3).map((contact: CloseOne, index: number) => (
+                {closeOneData.userCloseOne?.closeOnePhoneNumbers && closeOneData.userCloseOne.closeOnePhoneNumbers.length > 0 ? (
+                  closeOneData.userCloseOne.closeOnePhoneNumbers.slice(0, 3).map((contact: CloseOne, index: number) => (
                     <div key={index} className="flex items-center gap-4">
                       <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-400">
                         <Users className="h-4 w-4" />
