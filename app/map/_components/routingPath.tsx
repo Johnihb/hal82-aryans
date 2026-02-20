@@ -14,6 +14,7 @@ const RoutingPath = () => {
   const userDestination = useUserStore(state => state.userDestination)
   const containerRef = useRef<HTMLElement | null>(null)
   const [isExpanded, setIsExpanded] = useState(true)
+  const isExpandedRef = useRef(true) // persistent source of truth across effect re-runs
   const touchStartYRef = useRef(0)
   const touchStartTimeRef = useRef(0)
   const mapPaddingAppliedRef = useRef(false)
@@ -40,8 +41,7 @@ const RoutingPath = () => {
       routeWhileDragging: false,
       addWaypoints: false,
       fitSelectedRoutes: true,
-      draggableWaypoints: false,// prvent waypoints from being dragged
-      fitSelectedRoutes: true ,//This just auto-zooms/pans the map to show the entire route when it's calculated
+      draggableWaypoints: false,
       showAlternatives: true,
       altLineOptions: {
         styles: [
@@ -79,10 +79,10 @@ const RoutingPath = () => {
     // Apply map padding on mobile to prevent markers from being hidden
     const applyMapPadding = () => {
       if (window.innerWidth <= 768 && !mapPaddingAppliedRef.current) {
-        const panelHeight = window.innerHeight * 0.6 // 60vh
+        const panelHeight = window.innerHeight * 0.6
         map.fitBounds(map.getBounds(), {
           paddingBottomRight: [0, panelHeight + 20],
-          paddingTopLeft: [0, 80], // Account for navbar
+          paddingTopLeft: [0, 80],
           animate: true,
           duration: 0.5
         })
@@ -97,6 +97,11 @@ const RoutingPath = () => {
       
       containerRef.current = container
 
+      // ✅ Reapply collapsed state immediately before any UI is built
+      if (!isExpandedRef.current) {
+        container.classList.add('collapsed')
+      }
+
       // Create custom UI
       const header = document.createElement('div')
       header.className = 'route-header'
@@ -108,9 +113,12 @@ const RoutingPath = () => {
           </svg>
           <span className="mb-4">Route Details</span>
         </div>
-        <button class="route-toggle" aria-label="Minimize panel">
+        <button class="route-toggle" aria-label="${isExpandedRef.current ? 'Minimize panel' : 'Expand panel'}">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M19 12H5M12 19l-7-7 7-7"></path>
+            ${isExpandedRef.current
+              ? '<path d="M19 12H5M12 19l-7-7 7-7"></path>'
+              : '<circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor" transform="translate(-6 0)"/><circle cx="12" cy="12" r="1" fill="currentColor" transform="translate(6 0)"/>'
+            }
           </svg>
         </button>
       `
@@ -127,13 +135,13 @@ const RoutingPath = () => {
       container.appendChild(contentWrapper)
 
       // Apply map padding after panel is rendered (mobile only)
-      if (window.innerWidth <= 768) {
+      // Only apply if panel is expanded
+      if (window.innerWidth <= 768 && isExpandedRef.current) {
         setTimeout(() => {
           applyMapPadding()
         }, 200)
       }
 
-      // Desktop toggle and click-to-expand when collapsed
       const toggleBtn = header.querySelector('.route-toggle') as HTMLElement
       
       const togglePanel = (e?: Event) => {
@@ -146,9 +154,9 @@ const RoutingPath = () => {
         if (isCurrentlyCollapsed) {
           // Expand
           container.classList.remove('collapsed')
+          isExpandedRef.current = true // ✅ update ref
           setIsExpanded(true)
           
-          // Re-apply padding when expanding on mobile
           if (window.innerWidth <= 768) {
             setTimeout(() => {
               const panelHeight = window.innerHeight * 0.6
@@ -171,10 +179,11 @@ const RoutingPath = () => {
         } else {
           // Collapse
           container.classList.add('collapsed')
+          isExpandedRef.current = false // ✅ update ref
           setIsExpanded(false)
           
-          // Reset padding when collapsing on mobile
           if (window.innerWidth <= 768) {
+            mapPaddingAppliedRef.current = false // ✅ reset so padding can be reapplied on expand
             map.fitBounds(map.getBounds(), {
               paddingBottomRight: [0, 80],
               paddingTopLeft: [0, 80],
@@ -193,10 +202,8 @@ const RoutingPath = () => {
         }
       }
       
-      // Toggle button click
       toggleBtn?.addEventListener('click', togglePanel)
       
-      // Click anywhere on collapsed circle to expand (desktop only)
       const handleContainerClick = (e: MouseEvent) => {
         if (window.innerWidth > 768 && container.classList.contains('collapsed')) {
           togglePanel(e)
@@ -230,9 +237,10 @@ const RoutingPath = () => {
           if (deltaY > 60 || (deltaY > 30 && velocity > 0.5)) {
             if (!container.classList.contains('collapsed')) {
               container.classList.add('collapsed')
+              isExpandedRef.current = false // ✅ update ref
               setIsExpanded(false)
+              mapPaddingAppliedRef.current = false // ✅ reset padding flag
               
-              // Reset padding when collapsing
               map.fitBounds(map.getBounds(), {
                 paddingBottomRight: [0, 80],
                 paddingTopLeft: [0, 80],
@@ -245,9 +253,9 @@ const RoutingPath = () => {
           else if (deltaY < -60 || (deltaY < -30 && velocity > 0.5)) {
             if (container.classList.contains('collapsed')) {
               container.classList.remove('collapsed')
+              isExpandedRef.current = true // ✅ update ref
               setIsExpanded(true)
               
-              // Re-apply padding when expanding
               const panelHeight = window.innerHeight * 0.6
               map.fitBounds(map.getBounds(), {
                 paddingBottomRight: [0, panelHeight + 20],

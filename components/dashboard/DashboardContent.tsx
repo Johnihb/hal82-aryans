@@ -1,6 +1,6 @@
 "use client";
 
-import { color, motion } from "motion/react";
+import {  motion } from "motion/react";
 import {
   MapPin,
   Shield,
@@ -8,17 +8,17 @@ import {
   Navigation,
   User,
   Settings,
-  LogOut,
-  Bell,
   Activity,
   Users,
   CheckCircle,
-  AlertCircle
+  AlertCircle,
+  Mail
 } from "lucide-react";
 import Link from "next/link";
 import { signOut } from "@/lib/action/auth-client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import SMSButton from "../smsButton";
 
 type CloseOne = {
   id: string;
@@ -40,9 +40,7 @@ interface DashboardContentProps {
 }
 
 export default function DashboardContent({ user, closeOneData, username }: DashboardContentProps) {
-  const handleSignOut = async () => {
-    await signOut();
-  };
+  
 
   const stats = [
     {
@@ -114,15 +112,9 @@ export default function DashboardContent({ user, closeOneData, username }: Dashb
                 Here&apos;s what&apos;s happening with your safety dashboard
               </p>
             </div>
-            {/* <div className="flex items-center gap-4">
-              <Button variant="outline" size="sm">
-                <Bell className="h-4 w-4" />
-              </Button>
-              <Button variant="outline" onClick={handleSignOut}>
-                <LogOut className="h-4 w-4 mr-2" />
-                Sign Out
-              </Button>
-            </div> */}
+            <div className="flex items-center gap-4">
+              <SMSButton />
+            </div>
           </div>
         </div>
       </header>

@@ -7,7 +7,7 @@ interface UserState {
   userModeOfTransport: string;
   userLocation: [number, number];
   setUserLocation: (location: [number, number]) => void;
-  userDestination: [number , number ] | [null, null];
+  userDestination: [number|null , number|null ];
   setUserDestination: (location: [number, number] |[null,null]) => void;
 }
 const useUserStore = create<UserState>((set) => ({

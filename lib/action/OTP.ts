@@ -3,19 +3,20 @@ import prisma from "../prisma";
 import { randomInt } from "node:crypto";
 import { Twilio } from "twilio";
 import { updateUser } from "./updateUser";
+import { validateTwilioCredentials } from "../twilio";
 
 export const sendOTPToUser = async (to:string,userId:string )=>{
 
     // Environment variables
-      const accountSid = process.env.TWILIO_ACCOUNT_SID;
-      const authToken = process.env.TWILIO_AUTH_TOKEN;
-      const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
+      const result = await validateTwilioCredentials();
 
-      if (!accountSid || !authToken || !twilioPhoneNumber) {
+      if (!result.success) {
         return (
-          { message: "Twilio credentials not configured" }
+          { message: result.message }
         );
       }
+      
+      const {accountSid, authToken, twilioPhoneNumber} = result;
 
 
       // Validate phone number format
