@@ -43,7 +43,9 @@ export default function LoginDialog({ sessionUser }: { sessionUser?: string }) {
   return (
     <Dialog >
       <DialogTrigger asChild>
-        <Button className="rounded-full bg-blue-700 text-white hover:bg-blue-800 transition-all font-bold px-8 h-10 shadow-lg shadow-blue-600/10">Login</Button>
+        <Button className="h-10 rounded-sm border-2 border-black bg-black px-8 text-sm font-bold tracking-wide text-white transition-all hover:bg-neutral-800 active:scale-95">
+          Login
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md bg-white border border-gray-200 shadow-lg">
         <DialogHeader className="space-y-2">

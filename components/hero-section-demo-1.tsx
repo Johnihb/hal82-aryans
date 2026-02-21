@@ -3,7 +3,60 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import { MapPin, Shield, Phone, Navigation, Zap, Users, ArrowRight, ChevronRight, UserPlus, ShieldCheck, Pointer, Activity } from "lucide-react";
+
+const SafeHighlight = ({ children }: { children: React.ReactNode }) => (
+  <span className="bg-blue-500 px-4 py-2 rounded-sm transform -rotate-1 shadow-lg text-white inline-block">
+    {children}
+  </span>
+);
+
+const ConnectedHighlight = ({ children }: { children: React.ReactNode }) => (
+  <span className="flex items-center bg-red-500 px-4 py-2 rounded-sm transform rotate-1 shadow-lg text-white inline-block">
+    {children}
+  </span>
+);
+
+const ShimmerPulseIcon = () => (
+  <div className="relative ml-4 flex items-center">
+    {/* Ghost icon for background */}
+    <Activity className="h-8 w-8 md:h-12 md:w-12 text-white/20" />
+
+    {/* Glowing icon sweep */}
+    <motion.div
+      className="absolute inset-0 overflow-hidden"
+      animate={{
+        clipPath: [
+          "inset(0 100% 0 0)",
+          "inset(0 0% 0 0)",
+          "inset(0 0% 0 100%)",
+        ],
+      }}
+      transition={{
+        duration: 2,
+        repeat: Infinity,
+        ease: "easeInOut",
+      }}
+    >
+      <Activity className="h-8 w-8 md:h-12 md:w-12 text-white drop-shadow-[0_0_15px_rgba(255,255,255,1)]" />
+    </motion.div>
+
+    {/* Subtle shimmer line */}
+    <motion.div
+      className="absolute top-0 bottom-0 w-1 bg-white/80 blur-[2px]"
+      animate={{
+        left: ["0%", "100%"],
+        opacity: [0, 1, 0],
+      }}
+      transition={{
+        duration: 2,
+        repeat: Infinity,
+        ease: "easeInOut",
+      }}
+    />
+  </div>
+);
 
 export default function HeroSectionOne() {
   const features = [
@@ -80,12 +133,12 @@ export default function HeroSectionOne() {
           className="mx-auto max-w-6xl"
         >
 
-          <h1 className="mb-8 text-4xl font-black tracking-tight text-green-950 md:text-6xl lg:text-7xl flex items-center justify-center flex-wrap gap-x-4">
-            <span className="text-blue-700">Stay Safe,</span>
-            <span className="flex items-center text-red-600">
+          <h1 className="mb-8 text-4xl font-black tracking-tight text-white md:text-6xl lg:text-7xl flex items-center justify-center flex-wrap gap-x-4">
+            <SafeHighlight>Stay Safe,</SafeHighlight>
+            <ConnectedHighlight>
               Stay Connected
-              <Activity className="ml-2 h-8 w-8 md:h-12 md:w-12 text-red-600 animate-pulse" />
-            </span>
+              <ShimmerPulseIcon />
+            </ConnectedHighlight>
           </h1>
           <p className="mx-auto mb-12 max-w-3xl text-lg leading-relaxed text-neutral-600 md:text-xl">
             The world's most intuitive safety companion. Real-time tracking,
@@ -94,14 +147,14 @@ export default function HeroSectionOne() {
 
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link href="/dashboard">
-              <button className="h-14 rounded-full bg-blue-700 px-10 text-base font-bold text-white transition-all hover:bg-blue-800 hover:shadow-xl active:scale-95">
+              <Button className="h-14 rounded-sm border-2 border-black bg-black px-10 text-base font-bold tracking-wide text-white transition-all hover:bg-neutral-800 active:scale-95">
                 Join Now — It's Free
-              </button>
+              </Button>
             </Link>
             <Link href="/dashboard">
-              <button className="h-14 rounded-full border-2 border-neutral-200 bg-white px-10 text-base font-bold text-green-950 transition-all hover:border-green-600 hover:text-green-600 active:scale-95">
+              <Button variant="outline" className="h-14 rounded-sm border-2 border-black bg-white px-10 text-base font-bold tracking-wide text-black transition-all hover:bg-neutral-50 active:scale-95">
                 Learn More
-              </button>
+              </Button>
             </Link>
           </div>
         </motion.div>
@@ -205,9 +258,9 @@ export default function HeroSectionOne() {
 
           <div className="mt-24 text-center">
             <Link href="/dashboard">
-              <button className="h-16 rounded-full bg-green-950 px-12 text-lg font-bold text-white transition-all hover:bg-green-900 hover:shadow-2xl hover:shadow-green-950/20 active:scale-95">
+              <Button className="h-16 rounded-sm border-2 border-black bg-black px-12 text-lg font-bold tracking-wide text-white transition-all hover:bg-neutral-800 active:scale-95">
                 Ready to take control? Start Now
-              </button>
+              </Button>
             </Link>
           </div>
         </div>
