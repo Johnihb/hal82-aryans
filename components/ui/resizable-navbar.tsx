@@ -291,7 +291,7 @@ export const NavbarLogo = () => {
         src="/logo.jpeg"
         alt="Emergen Logo"
         className={cn(
-          "h-20 w-20 md:h-12 md:w-12 object-cover transition-all duration-200 rounded-full"
+          "h-10 w-10 md:h-12 md:w-12 object-cover transition-all duration-200 rounded-full"
         )}
       />
     </Link>

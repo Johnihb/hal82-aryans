@@ -301,7 +301,7 @@ export default function HeroSectionOne() {
           <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
             <div className="col-span-1 md:col-span-2 lg:col-span-1">
               <div className="mb-6 flex items-center gap-3">
-                <img src="/logo.svg" alt="Emergen Logo" className="h-12 w-12 object-contain" />
+                <img src="/logo.jpeg" alt="Emergen Logo" className="h-12 w-12 object-contain" />
               </div>
               <p className="max-w-xs text-neutral-500">
                 Building a safer world through connection and intelligent assistance.
