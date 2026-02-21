@@ -30,7 +30,7 @@ function NavbarDemo({ session }: { session: Session | null }) {
     },
     {
       name: "Policy",
-      link: "#policy",
+      link: "/terms&condition",
     },
   ];
 

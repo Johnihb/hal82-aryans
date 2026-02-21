@@ -280,9 +280,9 @@ export default function HeroSectionOne() {
             {['Features', 'Support', 'Legal'].map((title) => (
               <div key={title}>
                 <h4 className="mb-6 text-sm font-bold uppercase tracking-widest text-green-950">{title}</h4>
-                <ul className="space-y-4 text-neutral-500">
+                <ul className="space-y-4 text-neutral-500" id="contact">
                   {title === 'Features' && ['Location Tracking', 'Emergency Contacts', 'AI Assistant'].map(l => <li key={l} className="hover:text-red-600 cursor-pointer transition-colors">{l}</li>)}
-                  {title === 'Support' && ['Help Center', 'Contact Us', 'Privacy Policy'].map(l => <li key={l} className="hover:text-red-600 cursor-pointer transition-colors">{l}</li>)}
+                  {title === 'Support' && ['Help Center', 'Contact Us <br /> keshwor12@gmail.com', 'Privacy Policy'].map(l => <li key={l} className="hover:text-red-600 cursor-pointer transition-colors" dangerouslySetInnerHTML={{ __html: l }} />)}
                   {title === 'Legal' && ['Terms of Service', 'Privacy Policy', 'Cookie Policy'].map(l => <li key={l} className="hover:text-red-600 cursor-pointer transition-colors">{l}</li>)}
                 </ul>
               </div>
