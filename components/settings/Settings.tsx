@@ -203,7 +203,7 @@ const Settings = ({ userData }: { userData: User }) => {
                   <p className="text-xs font-bold">Joined {formattedDate}</p>
                 </div>
                 <div className="pt-4 border-t border-neutral-800">
-                  <Link href="#" className="flex items-center justify-between group/link">
+                  <Link href="/terms&condition" className="flex items-center justify-between group/link">
                     <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400 group-hover/link:text-white transition-colors">Privacy Control Center</span>
                     <ChevronRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
                   </Link>

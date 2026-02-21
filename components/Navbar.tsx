@@ -11,7 +11,7 @@ import {
   MobileNavMenu,
 } from "@/components/ui/resizable-navbar";
 import { auth } from "@/lib/auth";
-import { Bell } from "lucide-react";
+import { Bell, PhoneCall } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import LoginDialog from "./LoginDialog";
@@ -63,8 +63,12 @@ function NavbarDemo({ session }: { session: Session | null }) {
           <NavItems items={navItems} />
 
           <div className="flex items-center gap-3  ">
+              <NavbarButton variant="critical" as={Link} href="tel:+103" className="p-2.5">
+                <PhoneCall 
+                 className="h-4 w-4" strokeWidth={2.5} />
+              </NavbarButton>
             {session?.user && (
-              <NavbarButton variant="critical" as={Link} href="/notification" className="p-2.5">
+             <NavbarButton variant="critical" as={Link} href="/notification" className="p-2.5">
                 <Bell className="h-4 w-4" strokeWidth={2.5} />
               </NavbarButton>
             )}
