@@ -143,8 +143,8 @@ const TermsAndConditions = () => {
             <Section id="emergency" title="3. Emergency Services Disclaimer" icon={ShieldAlert}>
               <div className="p-4 bg-red-50 border border-red-100 rounded-2xl flex gap-3 items-start">
                 <ShieldAlert className="text-red-500 shrink-0 mt-0.5" size={18} />
-                <p className="text-red-800 text-sm font-semibold leading-relaxed">
-                  NOT A SUBSTITUTE FOR 911/112. In critical emergencies, contact official emergency services immediately. Emergen is a secondary support tool.
+                <p className="text-red-800 text-sm font-semibold leading-relaxed uppercase tracking-wide">
+                  NOT A SUBSTITUTE FOR A DOCTOR in an EMERGENCY condition/incident .
                 </p>
               </div>
             </Section>
@@ -188,7 +188,7 @@ const TermsAndConditions = () => {
                 </div>
                 <Button className="bg-white text-black hover:bg-neutral-200 rounded-full h-10 px-6 font-bold text-sm">
                   <Mail size={14} className="mr-2" />
-                  support@emergen.app
+                  keshwor12@gmail.app
                 </Button>
               </div>
             </Section>

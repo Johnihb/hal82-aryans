@@ -54,7 +54,7 @@ const SMSButton = () => {
   
   return (
     <>
-      <Button variant={'destructive'} onClick={handleClick}>
+      <Button variant={'destructive'} onClick={handleClick} className='cursor-pointer hover:bg-red-700'>
         <Mail className="h-4 w-4 mr-2"/>
         Send SMS
       </Button>

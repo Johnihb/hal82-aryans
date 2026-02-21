@@ -63,7 +63,7 @@ function NavbarDemo({ session }: { session: Session | null }) {
           <NavItems items={navItems} />
 
           <div className="flex items-center gap-3  ">
-              <NavbarButton variant="critical" as={Link} href="tel:+103" className="p-2.5">
+              <NavbarButton variant="critical" as={Link} href="tel:+102" className="p-2.5">
                 <PhoneCall 
                  className="h-4 w-4" strokeWidth={2.5} />
               </NavbarButton>
@@ -98,7 +98,11 @@ function NavbarDemo({ session }: { session: Session | null }) {
                 {item.name}
               </Link>
             ))}
-            <div className="pt-4 ">
+            <div className="pt-4 gap-4 flex items-center justify-center">
+              <NavbarButton variant="critical" as={Link} href="tel:+102" className="p-2.5">
+                <PhoneCall 
+                 className="h-4 w-4" strokeWidth={2.5} />
+              </NavbarButton>
               <LoginDialog sessionUser={session?.user?.email} name="Login"/>
             </div>
           </MobileNavMenu>
