@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
       if (!result.success) {
         return NextResponse.json(
           { message: result.message },
-          { status: 400 }
+          { status: 400 },
         );
       }
       

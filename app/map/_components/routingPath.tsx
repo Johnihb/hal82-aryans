@@ -33,45 +33,43 @@ const RoutingPath = () => {
     }
 
     // Create routing control
-    RoutingMachineRef.current = L.Routing.control({
-      waypoints: [
-        L.latLng(userPosition),
-        L.latLng([userDestination[0], userDestination[1]]),
-      ],
-      routeWhileDragging: false,
-      addWaypoints: false,
-      fitSelectedRoutes: true,
-      draggableWaypoints: false,
-      showAlternatives: true,
-      altLineOptions: {
-        styles: [
-          { 
-            color: '#94a3b8',
-            opacity: 0.4, 
-            weight: 5,
-          }
-        ]
-      } as L.Routing.LineOptions,
-      lineOptions: {
-        styles: [
-          { 
-            color: '#6366f1',
-            opacity: 0.9, 
-            weight: 6,
-          }
-        ],
-        extendToWaypoints: true,
-        missingRouteTolerance: 0
-      } as L.Routing.LineOptions,
-      
-      router: L.Routing.osrmv1({
-        serviceUrl: process.env.NEXT_PUBLIC_OSRM_SERVICE_URL || 'https://router.project-osrm.org/route/v1',
-        profile: process.env.NEXT_PUBLIC_OSRM_SERVICE_URL ? userModeOfTransport : 'driving',
-      }),
-      
-      collapsible: false,
-      containerClassName: 'route-panel'
-    }).addTo(map)
+RoutingMachineRef.current = (L.Routing.control({
+  waypoints: [
+    L.latLng(userPosition as L.LatLngExpression),
+    L.latLng(userDestination[0], userDestination[1]),
+  ],
+  routeWhileDragging: false,
+  addWaypoints: false,
+  fitSelectedRoutes: true,
+  draggableWaypoints: false,
+  showAlternatives: true,
+  altLineOptions: {
+    styles: [
+      {
+        color: '#94a3b8',
+        opacity: 0.4,
+        weight: 5,
+      }
+    ]
+  } as L.Routing.LineOptions,
+  lineOptions: {
+    styles: [
+      {
+        color: '#6366f1',
+        opacity: 0.9,
+        weight: 6,
+      }
+    ],
+    extendToWaypoints: true,
+    missingRouteTolerance: 0,
+  } as L.Routing.LineOptions,
+  router: L.Routing.osrmv1({
+    serviceUrl: process.env.NEXT_PUBLIC_OSRM_SERVICE_URL || 'https://router.project-osrm.org/route/v1',
+    profile: process.env.NEXT_PUBLIC_OSRM_SERVICE_URL ? userModeOfTransport : 'driving',
+  }),
+  collapsible: false,
+  containerClassName: 'route-panel',
+} as L.Routing.RoutingControlOptions & { draggableWaypoints: boolean })).addTo(map)
 
     // Inject styles
     injectStyles()

@@ -117,7 +117,6 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
       animate={{
         backgroundColor: visible ? "rgba(255,255,255,0.6)" : tokens.bg.base,
         backdropFilter: visible ? "saturate(120%) blur(8px)" : "none",
-        WebkitBackdropFilter: visible ? "saturate(120%) blur(8px)" : "none",
         boxShadow: visible ? "0 8px 24px rgba(0,0,0,0.06)" : "none",
         borderBottom: visible ? tokens.border.subtle : tokens.border.subtle,
         borderRadius: visible ? tokens.radius : "0px",
@@ -209,7 +208,7 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
       animate={{
         backgroundColor: visible ? "rgba(255,255,255,0.7)" : tokens.bg.base,
         backdropFilter: visible ? "saturate(120%) blur(8px)" : "none",
-        WebkitBackdropFilter: visible ? "saturate(120%) blur(8px)" : "none",
+        // WebkitBackdropFilter: visible ? "saturate(120%) blur(8px)" : "none",
         boxShadow: visible ? "0 8px 24px rgba(0,0,0,0.06)" : "none",
         borderBottom: visible ? tokens.border.subtle : tokens.border.subtle,
       }}
