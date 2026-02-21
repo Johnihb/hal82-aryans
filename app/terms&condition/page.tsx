@@ -188,7 +188,7 @@ const TermsAndConditions = () => {
                 </div>
                 <Button className="bg-white text-black hover:bg-neutral-200 rounded-full h-10 px-6 font-bold text-sm">
                   <Mail size={14} className="mr-2" />
-                  keshwor12@gmail.app
+                  support@emergen.app
                 </Button>
               </div>
             </Section>
