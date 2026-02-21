@@ -15,7 +15,6 @@ import { NavbarButton } from "@/components/ui/resizable-navbar"
 import { signOut, signUp } from "@/lib/action/auth-client"
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import { Button } from "./ui/button"
 
 export default function LoginDialog({ sessionUser }: { sessionUser?: string }) {
   const [isMounted, setIsMounted] = useState(false)
@@ -58,7 +57,12 @@ export default function LoginDialog({ sessionUser }: { sessionUser?: string }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="rounded-full bg-blue-700 text-white hover:bg-blue-800 transition-all font-bold px-8 h-10 shadow-lg shadow-blue-600/10">Login</Button>
+        <NavbarButton
+          variant="primary"
+          className="font-bold px-6 cursor-pointer transform transition-transform duration-150 hover:-translate-y-1 hover:scale-105 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
+        >
+          Login
+        </NavbarButton>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md bg-white border-2 border-black p-6 rounded-[2px]">
         <DialogHeader className="space-y-3">
