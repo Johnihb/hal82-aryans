@@ -54,7 +54,7 @@ function NavbarDemo({ session }: { session: Session | null }) {
 
 
   return (
-    <div className="relative w-full text-black">
+    <div className="w-full text-black">
       <Navbar>
         {/* Desktop Navigation */}
 

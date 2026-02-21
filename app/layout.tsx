@@ -46,7 +46,7 @@ export default async function RootLayout({
       */}
       <body
         suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased pt-[72px] lg:pt-[72px]`}
       >
         <Navbar session={session} />
         {children}
