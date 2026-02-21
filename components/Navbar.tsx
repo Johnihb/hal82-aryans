@@ -72,7 +72,7 @@ function NavbarDemo({ session }: { session: Session | null }) {
                 <Bell className="h-4 w-4" strokeWidth={2.5} />
               </NavbarButton>
             )}
-            <LoginDialog sessionUser={session?.user?.email} />
+            <LoginDialog sessionUser={session?.user?.email} name="Login" />
           </div>
         </NavBody>
 
@@ -99,7 +99,7 @@ function NavbarDemo({ session }: { session: Session | null }) {
               </Link>
             ))}
             <div className="pt-4 ">
-              <LoginDialog sessionUser={session?.user?.email} />
+              <LoginDialog sessionUser={session?.user?.email} name="Login"/>
             </div>
           </MobileNavMenu>
         </MobileNav>

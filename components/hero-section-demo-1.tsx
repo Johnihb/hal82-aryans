@@ -5,6 +5,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { MapPin, Shield, Phone, Navigation, Zap, Users, ArrowRight, ChevronRight, UserPlus, ShieldCheck, Pointer, Activity } from "lucide-react";
+import LoginDialog from "./LoginDialog";
 
 const SafeHighlight = ({ children }: { children: React.ReactNode }) => (
   <span className="bg-blue-500 px-4 py-2 rounded-sm transform -rotate-1 shadow-lg text-white inline-block">
@@ -84,11 +85,11 @@ export default function HeroSectionOne() {
       icon: <Phone className="h-6 w-6" />,
       title: "SMS Verification",
       description: "Bank-grade phone verification to keep your account secure.",
-      color: "text-green-600",
-      bg: "bg-green-50",
-      hoverShadow: "hover:shadow-green-600/5",
-      hoverBorder: "hover:border-green-600/30",
-      iconHover: "group-hover:bg-green-600",
+      color: "text-gray-600",
+      bg: "bg-gray-50",
+      hoverShadow: "hover:shadow-gray-600/5",
+      hoverBorder: "hover:border-gray-600/30",
+      iconHover: "group-hover:bg-gray-600",
     },
     {
       icon: <Navigation className="h-6 w-6" />,
@@ -145,12 +146,13 @@ export default function HeroSectionOne() {
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link href="/dashboard">
+            {/* <Link href="/dashboard">
               <Button className="h-14 rounded-sm border-2 border-black bg-black px-10 text-base font-bold tracking-wide text-white transition-all hover:bg-neutral-800 active:scale-95">
                 Join Now — It's Free
               </Button>
-            </Link>
-            <Link href="/dashboard">
+            </Link> */}
+             <LoginDialog sessionUser={''} name="Join Now — It's Free"/>
+            <Link href="/terms&condition">
               <Button variant="outline" className="h-14 rounded-sm border-2 border-black bg-white px-10 text-base font-bold tracking-wide text-black transition-all hover:bg-neutral-50 active:scale-95">
                 Learn More
               </Button>
@@ -163,7 +165,7 @@ export default function HeroSectionOne() {
       <section id="about" className="bg-neutral-50 px-6 py-32 border-y border-neutral-100">
         <div className="mx-auto max-w-7xl">
           <div className="mb-20 text-center">
-            <h2 className="mb-4 text-3xl font-black text-green-950 md:text-5xl"> Built for Certainty</h2>
+            <h2 className="mb-4 text-3xl font-black text-gray-950 md:text-5xl"> Built for Certainty</h2>
             <p className="mx-auto max-w-xl text-neutral-600">Powerful features designed to keep you safe in any situation.</p>
           </div>
 
@@ -189,7 +191,7 @@ export default function HeroSectionOne() {
                 )}>
                   {feature.icon}
                 </div>
-                <h3 className="mb-3 text-xl font-bold text-green-950">{feature.title}</h3>
+                <h3 className="mb-3 text-xl font-bold text-gray-950">{feature.title}</h3>
                 <p className="leading-relaxed text-neutral-600">{feature.description}</p>
               </motion.div>
             ))}
@@ -201,10 +203,10 @@ export default function HeroSectionOne() {
       <section id="how-it-works" className="px-6 py-32 bg-white">
         <div className="mx-auto max-w-7xl">
           <div className="mb-20 text-center">
-            <span className="mb-4 inline-block text-sm font-bold tracking-widest text-green-600 uppercase">
+            <span className="mb-4 inline-block text-sm font-bold tracking-widest text-gray-600 uppercase">
               Simple & Fast
             </span>
-            <h2 className="mb-4 text-3xl font-black text-green-950 md:text-5xl">How it Works</h2>
+            <h2 className="mb-4 text-3xl font-black text-gray-950 md:text-5xl">How it Works</h2>
             <p className="mx-auto max-w-xl text-neutral-600">Join 50k+ users who trust Emergen for their peace of mind.</p>
           </div>
 
@@ -214,19 +216,34 @@ export default function HeroSectionOne() {
                 icon: <UserPlus className="h-8 w-8" />,
                 title: "Create Account",
                 desc: "Sign up in seconds and verify your identity for absolute security.",
-                step: "01"
+                step: "01",
+                circleBg: "bg-indigo-50",
+                circleText: "text-indigo-700",
+                circleHoverBg: "group-hover:bg-indigo-700",
+                circleHoverText: "group-hover:text-white",
+                ringShadow: "shadow-indigo-700/5"
               },
               {
                 icon: <Users className="h-8 w-8" />,
                 title: "Add Network",
                 desc: "Link your trusted emergency contacts and closest friends.",
-                step: "02"
+                step: "02",
+                circleBg: "bg-teal-50",
+                circleText: "text-teal-700",
+                circleHoverBg: "group-hover:bg-teal-700",
+                circleHoverText: "group-hover:text-white",
+                ringShadow: "shadow-teal-700/5"
               },
               {
                 icon: <ShieldCheck className="h-8 w-8" />,
                 title: "Stay Protected",
                 desc: "Our AI and network keep watch, ready to assist 24/7.",
-                step: "03"
+                step: "03",
+                circleBg: "bg-red-50",
+                circleText: "text-red-700",
+                circleHoverBg: "group-hover:bg-red-700",
+                circleHoverText: "group-hover:text-white",
+                ringShadow: "shadow-red-700/5"
               }
             ].map((step, idx) => (
               <motion.div
@@ -237,13 +254,24 @@ export default function HeroSectionOne() {
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 className="relative text-center group"
               >
-                <div className="mb-8 mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-green-50 text-green-600 transition-all group-hover:scale-110 group-hover:bg-green-600 group-hover:text-white shadow-lg shadow-green-600/5">
+                <div className={cn(
+                  "mb-8 mx-auto flex h-20 w-20 items-center justify-center rounded-3xl transition-all group-hover:scale-105 shadow-sm",
+                  step.circleBg,
+                  step.circleText,
+                  step.circleHoverBg,
+                  step.circleHoverText,
+                  step.ringShadow
+                )}>
                   {step.icon}
-                  <span className="absolute -top-2 -right-2 text-4xl font-black text-green-600/10 group-hover:text-white/20">
+                  <span className={cn(
+                    "absolute -top-2 -right-2 text-4xl font-black",
+                    "text-black/10",
+                    "group-hover:text-white/20"
+                  )}>
                     {step.step}
                   </span>
                 </div>
-                <h3 className="mb-4 text-2xl font-bold text-green-950">{step.title}</h3>
+                <h3 className="mb-4 text-2xl font-bold text-gray-950">{step.title}</h3>
                 <p className="text-neutral-600 leading-relaxed">{step.desc}</p>
 
                 {idx < 2 && (
@@ -256,11 +284,13 @@ export default function HeroSectionOne() {
           </div>
 
           <div className="mt-24 text-center">
-            <Link href="/dashboard">
+            {/* <Link href="/dashboard">
               <Button className="h-16 rounded-sm border-2 border-black bg-black px-12 text-lg font-bold tracking-wide text-white transition-all hover:bg-neutral-800 active:scale-95">
                 Ready to take control? Start Now
               </Button>
-            </Link>
+            </Link> */}
+                
+             <LoginDialog sessionUser={''} name="Ready to take control? Start Now"/>
           </div>
         </div>
       </section>
@@ -279,7 +309,7 @@ export default function HeroSectionOne() {
             </div>
             {['Features', 'Support', 'Legal'].map((title) => (
               <div key={title}>
-                <h4 className="mb-6 text-sm font-bold uppercase tracking-widest text-green-950">{title}</h4>
+                <h4 className="mb-6 text-sm font-bold uppercase tracking-widest text-gray-950">{title}</h4>
                 <ul className="space-y-4 text-neutral-500" id="contact">
                   {title === 'Features' && ['Location Tracking', 'Emergency Contacts', 'AI Assistant'].map(l => <li key={l} className="hover:text-red-600 cursor-pointer transition-colors">{l}</li>)}
                   {title === 'Support' && ['Help Center', 'Contact Us <br /> keshwor12@gmail.com', 'Privacy Policy'].map(l => <li key={l} className="hover:text-red-600 cursor-pointer transition-colors" dangerouslySetInnerHTML={{ __html: l }} />)}
