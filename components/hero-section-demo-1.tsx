@@ -134,7 +134,7 @@ export default function HeroSectionOne() {
         >
 
           <h1 className="mb-8 text-4xl font-black tracking-tight text-white md:text-6xl lg:text-7xl flex items-center justify-center flex-wrap gap-x-4">
-            <SafeHighlight>Stay Safe,</SafeHighlight>
+            <SafeHighlight>Stay Safe</SafeHighlight>
             <ConnectedHighlight>
               Stay Connected
               <ShimmerPulseIcon />
