@@ -4,9 +4,9 @@ import './assistant.css'
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 const page = async() => {
-  //  const session = await auth.api.getSession({headers:await headers()})
+   const session = await auth.api.getSession({headers:await headers()})
   
-  //   if (!session) return redirect('/');
+    if (!session) return redirect('/');
   return (
   <AssistantPage />
   )

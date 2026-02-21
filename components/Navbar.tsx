@@ -53,31 +53,25 @@ function NavbarDemo({ session }: { session: Session | null }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 
-  return (
-    <div className="w-full text-black">
-      <Navbar>
-        {/* Desktop Navigation */}
+  const navItems = session?.user?.email ? navItemsAfterLogin : navItemsBeforeLogin;
 
+  return (
+    <div className="w-full">
+      <Navbar>
         <NavBody>
           <NavbarLogo />
-          {
-            session?.user?.email ?
-              <NavItems items={navItemsAfterLogin} /> : <NavItems items={navItemsBeforeLogin} />
-          }
+          <NavItems items={navItems} />
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3  ">
             {session?.user && (
-              <NavbarButton variant="secondary" className="rounded-full text-neutral-500 hover:text-red-600 p-2">
-                <Link href={"/notification"}>
-                  <Bell className="h-5 w-5" />
-                </Link>
+              <NavbarButton variant="critical" as={Link} href="/notification" className="p-2.5">
+                <Bell className="h-4 w-4" strokeWidth={2.5} />
               </NavbarButton>
             )}
             <LoginDialog sessionUser={session?.user?.email} />
           </div>
         </NavBody>
 
-        {/* Mobile Navigation */}
         <MobileNav>
           <MobileNavHeader>
             <NavbarLogo />
@@ -90,25 +84,22 @@ function NavbarDemo({ session }: { session: Session | null }) {
             isOpen={isMobileMenuOpen}
             onClose={() => setIsMobileMenuOpen(false)}
           >
-            {(session?.user?.email ? navItemsAfterLogin : navItemsBeforeLogin).map((item, idx) => (
+            {navItems.map((item, idx) => (
               <Link
                 key={`mobile-link-${idx}`}
                 href={item.link}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block py-3 text-lg font-semibold text-neutral-800 hover:text-red-600 transition-colors border-b border-neutral-50 last:border-0"
+                className="block py-4 text-lg font-bold text-black hover:text-black/80 transition-colors border-b-2 border-black last:border-0"
               >
                 {item.name}
               </Link>
-            ))
-            }
-            <div className="pt-4">
+            ))}
+            <div className="pt-4 ">
               <LoginDialog sessionUser={session?.user?.email} />
             </div>
-          </MobileNavMenu>{" "}
+          </MobileNavMenu>
         </MobileNav>
       </Navbar>
-
-      {/* Navbar */}
     </div>
   );
 }

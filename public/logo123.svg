@@ -1,0 +1,26 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer glowing background effect (subtle) -->
+  <circle cx="256" cy="256" r="240" fill="url(#paint0_radial)" fill-opacity="0.1"/>
+  
+  <!-- Swirling Hands/Curves (Orange/Yellow) -->
+  <path d="M120 180C100 220 110 320 180 370C240 410 330 390 380 340C410 310 420 250 380 180" stroke="#F59E0B" stroke-width="24" stroke-linecap="round" opacity="0.9"/>
+  <path d="M392 332C412 292 402 192 332 142C272 102 182 122 132 172C102 202 92 262 132 332" stroke="#FB923C" stroke-width="24" stroke-linecap="round" opacity="0.9"/>
+
+  <!-- Outer Blue Accent -->
+  <path d="M150 110C100 130 60 180 50 250" stroke="#1E3A8A" stroke-width="16" stroke-linecap="round"/>
+
+  <!-- Medical Cross (Red) -->
+  <rect x="206" y="156" width="100" height="200" rx="10" fill="#EF4444"/>
+  <rect x="156" y="206" width="200" height="100" rx="10" fill="#EF4444"/>
+  
+  <!-- Person Silhouette (White) -->
+  <circle cx="256" cy="226" r="35" fill="white"/>
+  <path d="M256 276C221 276 193 304 193 336H319C319 304 291 276 256 276Z" fill="white"/>
+
+  <defs>
+    <radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(256 256) rotate(90) scale(240)">
+      <stop stop-color="white"/>
+      <stop offset="1" stop-color="#E5E7EB"/>
+    </radialGradient>
+  </defs>
+</svg>
