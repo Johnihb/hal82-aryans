@@ -87,8 +87,9 @@ export async function POST(req: NextRequest) {
      const result = await validateTwilioCredentials();
 
       if (!result.success) {
-        return (
-          { message: result.message }
+        return NextResponse.json(
+          { message: result.message },
+          { status: 400 }
         );
       }
       
