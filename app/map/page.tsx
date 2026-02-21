@@ -25,10 +25,10 @@ const Page = () => {
 
 
   return(<>
-  <div className="flex justify-end my-3 space-x-2" >
-      <SelectServices />
-      <ModeOfTransport />
-      <LoadMore />
+  <div className="flex flex-col sm:flex-row gap-2 sm:gap-2 my-3 px-3 sm:px-0 sm:justify-end" >
+      <div className="flex-1 sm:flex-none"><SelectServices /></div>
+      <div className="flex-1 sm:flex-none"><ModeOfTransport /></div>
+      <div className="flex-1 sm:flex-none"><LoadMore /></div>
   </div>
         <MapClient />
         

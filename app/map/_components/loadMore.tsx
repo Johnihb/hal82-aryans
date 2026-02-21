@@ -17,7 +17,7 @@ const LoadMoreButton = () => {
   }
 
   return (
-    <Button variant={'outline'} className='font-mono hover:bg-gray-200 '  onClick={handleClick}><HardDriveDownload className='my-auto' /> Load More</Button>
+    <Button variant={'outline'} className='font-mono hover:bg-gray-200 w-full sm:w-auto py-5 sm:py-2 px-3 text-base sm:text-sm h-auto sm:h-10'  onClick={handleClick}><HardDriveDownload className='my-auto' /> Load More</Button>
   )
 }
 
